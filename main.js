@@ -1,11 +1,10 @@
 // Htmldagi elementlarni chaqirib olamiz
+//================ 1 =============
 const btnPlay = document.querySelector("#btn-play");
 const btnPlayIcon = document.querySelector("#btn-play-icon");
 const btnRepeat = document.querySelector("#btn-repeat");
-
 const btnPrev = document.querySelector("#btn-prev");
 const btnNext = document.querySelector("#btn-next");
-
 const btnVolume = document.querySelector("#btn-volume");
 const btnVolumeIcon = document.querySelector("#btn-volume i");
 const playerVolume = document.querySelector("#player-volume");
@@ -19,6 +18,8 @@ const audioPlayer = document.querySelector("#audio-player");
 let currentSong = 0;
 let repeatSong = false;
 
+// data yaratib olamiz
+// =========================== 2==========================
 const songs = [
     {
         name: "Javaohir Lukmanov",
@@ -52,7 +53,7 @@ const songs = [
     },
 ]
 
-
+// eng oxirgi qilinadiga ishlarimiz
 btnPlay.addEventListener("click", () => togglePlaySong());
 btnPrev.addEventListener("click", () => changeSong(false));
 btnNext.addEventListener("click", () => changeSong());
@@ -62,7 +63,7 @@ playerProgress.addEventListener("input", () => changeTime());
 audioPlayer.addEventListener("timeupdate", () => timeUpdate());
 audioPlayer.addEventListener("ended", () => ended());
 
-
+// ========================== 3 =======================
 const togglePlaySong = () => {
   if (audioPlayer.paused) {
     audioPlayer.play();
@@ -72,6 +73,7 @@ const togglePlaySong = () => {
     btnPlayIcon.classList.replace("bi-pause-fill", "bi-play-fill");
   }
 };
+//============================= 4 ===========================
 const changeSong = (next = true) => {
   if (next && currentSong < songs.length - 1) {
     currentSong++;
@@ -84,6 +86,7 @@ const changeSong = (next = true) => {
   updatePlayer();
   togglePlaySong();
 };
+//  ================================ 5 =====================
 const updatePlayer = () => {
   const song = songs[currentSong];
 
@@ -92,10 +95,12 @@ const updatePlayer = () => {
   audioPlayer.src = song.path;
   playerProgress.value = audioPlayer.currentTime;
 };
+/// ====================== 6 ==============================
 const toggleRepeatSong = () => {
   repeatSong = !repeatSong;
   btnRepeat.classList.toggle("btn-activated");
 };
+// ======================== 7 ================================
 const timeUpdate = () => {
   const { currentTime, duration } = audioPlayer;
 
@@ -106,6 +111,7 @@ const timeUpdate = () => {
   playerProgress.max = duration;
   playerProgress.value = currentTime;
 };
+// ============================ 8 =============================
 const changeVolume = () => {
   const { value } = playerVolume;
 
@@ -117,6 +123,7 @@ const changeVolume = () => {
     btnVolumeIcon.classList.replace("bi-volume-mute-fill", "bi-volume-up-fill");
   }
 };
+//  ============================== 9 ==========================
 const changeTime = () => {
   audioPlayer.currentTime = playerProgress.value;
 };
